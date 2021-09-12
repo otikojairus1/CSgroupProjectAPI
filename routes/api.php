@@ -3,7 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegisterUsersController;
-
+use App\Http\Controllers\ContributionController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -22,3 +22,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post('/register', [RegisterUsersController::class, 'store']);
 Route::post('/login', [RegisterUsersController::class, 'login']);
+Route::post('/create/contribution', [ContributionController::class, 'contribute']);

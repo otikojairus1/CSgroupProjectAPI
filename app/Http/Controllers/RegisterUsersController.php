@@ -16,11 +16,12 @@ class RegisterUsersController extends Controller
        // dd($request);
        $rules = [
         'name' => 'unique:users|required',
+        'phone' => 'unique:users|required',
         'email'    => 'unique:users|required',
         'password' => 'required',
     ];
 
-    $input     = $request->only('name', 'email','password');
+    $input     = $request->only('name', 'phone','email','password');
     $validator = Validator::make($input, $rules);
 
     if ($validator->fails()) {
@@ -29,7 +30,8 @@ class RegisterUsersController extends Controller
     $name = $request->name;
     $email    = $request->email;
     $password = $request->password;
-    $user     = User::create(['name' => $name, 'email' => $email, 'password' => Hash::make($password)]);
+    $phone = $request->phone;
+    $user     = User::create(['name' => $name, 'email' => $email, 'password' => Hash::make($password),'phone'=>$phone]);
     //$token = $request->name->createToken('accessToken');
     return response()->json(['success' => true, 'message' => 'user has registered successfully.']);
     }
