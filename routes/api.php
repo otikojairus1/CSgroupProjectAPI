@@ -23,3 +23,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('/register', [RegisterUsersController::class, 'store']);
 Route::post('/login', [RegisterUsersController::class, 'login']);
 Route::post('/create/contribution', [ContributionController::class, 'contribute']);
+Route::post('/view/contribution', [ContributionController::class, 'show']);
+Route::get('/all/contributions', [ContributionController::class, 'index']);
+Route::post('/delete/contribution', [ContributionController::class, 'destroy']);
+Route::post('/update/contribution', [ContributionController::class, 'update']);
+Route::get('/verified/contribution', [ContributionController::class, 'verifiedContributions']);
+
+Route::post('/pay', [ContributionController::class, 'pay']);

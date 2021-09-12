@@ -19,7 +19,7 @@ class CreateContributionsTable extends Migration
             $table->string('description');
             $table->integer('targetAmount');
             $table->string('paymentoption');
-          
+            $table->string('verified');
             $table->timestamps();
         });
     }
