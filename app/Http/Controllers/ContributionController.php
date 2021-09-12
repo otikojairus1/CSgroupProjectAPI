@@ -31,8 +31,6 @@ class ContributionController extends Controller
        $rules =
            ['amount'=> 'required|integer',
            'phone'=>'required|integer',
-           
-           
            ]
        ;
 
@@ -48,7 +46,7 @@ class ContributionController extends Controller
 
        $curl = curl_init();
        curl_setopt($curl, CURLOPT_URL, $url);
-       $credentials = base64_encode('UrsGc9lFwXGkkhALW6v2mOdJ3pJpAWBD:yLvuma0CU4YOPD0w');
+       $credentials = base64_encode('D5VGIIfdrsmTHv7dCwGyo4hubU2YFFxN:XelQksS4JcMXfVMI');
        curl_setopt($curl, CURLOPT_HTTPHEADER, array('Authorization: Basic '.$credentials)); //setting a custom header
        curl_setopt($curl, CURLOPT_HEADER, false);
        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
@@ -96,9 +94,9 @@ class ContributionController extends Controller
            'PartyA' => $partyA,
            'PartyB' => $partyB,
            'PhoneNumber' => $partyA,
-             'CallBackURL' => 'https://iozduid/php-api/public/mycallback',
-           'AccountReference' => 'MSAADA',
-           'TransactionDesc' => 'DONATING VIA MSAADA APP'
+             'CallBackURL' => 'https://iozduid.com/php-api/public/mycallback',
+           'AccountReference' => 'DONATING VIA MSAADA APP',
+           'TransactionDesc' => 'DONATING'
        );
        
        $data_string = json_encode($curl_post_data);
