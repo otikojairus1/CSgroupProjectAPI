@@ -341,9 +341,10 @@ class ContributionController extends Controller
         return response()->json(['success' => true, 'response' => $C]);
     }
 
-    public function pending(){
 
-        $C = PendingTransaction::all();
+    public function all(){
+
+        $C = callback::all();
 
         return response()->json(['success' => true, 'response' => $C]);
     }
