@@ -30,3 +30,9 @@ Route::post('/update/contribution', [ContributionController::class, 'update']);
 Route::get('/verified/contribution', [ContributionController::class, 'verifiedContributions']);
 
 Route::post('/pay', [ContributionController::class, 'pay']);
+Route::post('/v2/74aqaGu3sd4/callback', [ContributionController::class, 'callback']);
+
+Route::get('/completed/transactions', [ContributionController::class, 'completed']);
+Route::get('/pending/transactions', [ContributionController::class, 'pending']);
+
+
