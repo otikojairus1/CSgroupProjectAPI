@@ -102,7 +102,7 @@ class ContributionController extends Controller
            'PartyB' => $partyB,
            'PhoneNumber' => $partyA,
            'AccountReference'=>$contribution,
-           'CallBackURL' => 'https://msaadaapp.com/api/v2/74aqaGu3sd4/callback',
+           'CallBackURL' => 'https://msaadaproject.herokuapp.com/api/v2/74aqaGu3sd4/callback',
            'TransactionDesc' => 'DONATING'
        );
 
