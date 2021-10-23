@@ -35,5 +35,5 @@ Route::post('/v2/74aqaGu3sd4/callback', [ContributionController::class, 'callbac
 Route::get('/completed/transactions', [ContributionController::class, 'completed']);
 Route::get('/pending/transactions', [ContributionController::class, 'pending']);
 Route::get('/all/transactions', [ContributionController::class, 'all']);
-
+Route::post('/search/contribution', [ContributionController::class, 'search']);
 

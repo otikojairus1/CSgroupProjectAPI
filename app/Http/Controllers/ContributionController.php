@@ -36,11 +36,11 @@ class ContributionController extends Controller
        $rules =
            ['amount'=> 'required|integer',
            'phone'=>'required|integer',
-           'contribution'=>'required|integer'
+           'id'=>'required|integer'
            ]
        ;
 
-       $input     = $request->only('amount','phone', 'contribution');
+       $input     = $request->only('amount','phone', 'id');
        $validator = Validator::make($input, $rules);
 
        if ($validator->fails()) {
@@ -76,7 +76,7 @@ class ContributionController extends Controller
        date_default_timezone_set('Africa/Nairobi');
        $timestamp =  date('YmdHis');
        $amount = $request->amount;
-       $contribution = $request->contribution;
+       $contribution = $request->id;
        $dataToEncode = $BusinessShortCode.$mpesaOnlinePasskey.$timestamp;
        //dd($dataToEncode);
        $password = base64_encode($dataToEncode);
@@ -352,6 +352,26 @@ class ContributionController extends Controller
     public function all(){
 
         $C = callback::all();
+
+        return response()->json(['success' => true, 'response' => $C]);
+    }
+
+    public function search(Request $request){
+
+        $rules =
+            ['title'=> 'required',
+
+            ]
+        ;
+
+        $input     = $request->only('title');
+        $validator = Validator::make($input, $rules);
+
+        if ($validator->fails()) {
+            return response()->json(['success' => false, 'error' => $validator->messages()]);
+        }
+
+        $C = Contribution::where('title','LIKE','%'.$request->title.'%')->get();
 
         return response()->json(['success' => true, 'response' => $C]);
     }
