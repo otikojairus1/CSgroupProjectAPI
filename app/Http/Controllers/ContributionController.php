@@ -174,10 +174,10 @@ class ContributionController extends Controller
             $T->contributionId = $pending->contributionId;
             $T->save();
 
-            $contributionUpdate = CompletedTransaction::where('id',$T->contributionId )->first();
+
+            $contributionUpdate = Contribution::where('id',$pending->contributionId )->first();
 
             $contributionUpdate->amount =  $contributionUpdate->amount +  $newTransaction->Amount;
-
            // $pending->delete();
         }
 
