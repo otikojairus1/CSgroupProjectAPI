@@ -173,6 +173,11 @@ class ContributionController extends Controller
             $T->Amount = $Amount;
             $T->contributionId = $pending->contributionId;
             $T->save();
+
+            $contributionUpdate = CompletedTransaction::where('id',$T->contributionId )->first();
+
+            $contributionUpdate->amount =  $contributionUpdate->amount +  $newTransaction->Amount;
+
            // $pending->delete();
         }
 
@@ -337,6 +342,8 @@ class ContributionController extends Controller
     public function completed(){
 
         $C = CompletedTransaction::all();
+
+
 
         return response()->json(['success' => true, 'response' => $C]);
     }

@@ -65,7 +65,13 @@ class RegisterUsersController extends Controller
            $user = Auth::user(); 
            // $success['token'] =  $user->createToken('MyApp')-> accessToken; 
            $token = $user->createToken('accessToken', ['admin']);
-            return response()->json(['success' => true,   'userdetails'=>$user,'token'=>$token],200); 
+
+                if($user->email == "admin@msaadaapp.com"){
+                    return response()->json(['success' => true, 'userType'=>'admin' ,'userdetails'=>$user,'token'=>$token],200); 
+                }else{
+                    return response()->json(['success' => true, 'userType'=>'other', 'userdetails'=>$user,'token'=>$token],200); 
+                }
+            
         } 
         else{ 
             return response()->json(['success'=>false,'error'=>'wrong login credentials' ], 401); 
