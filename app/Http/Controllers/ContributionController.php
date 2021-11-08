@@ -175,9 +175,9 @@ class ContributionController extends Controller
             $T->save();
 
 
-            $contributionUpdate = Contribution::where('id',$pending->contributionId )->first();
+           // $contributionUpdate = Contribution::where('id',$pending->contributionId )->first();
 
-            $contributionUpdate->amount =  $contributionUpdate->amount +  $newTransaction->Amount;
+            //$contributionUpdate->amount =  $contributionUpdate->amount +  $newTransaction->Amount;
            // $pending->delete();
         }
 
