@@ -194,9 +194,10 @@ class ContributionController extends Controller
         'targetAmount' => 'required',
         'verified'=>'',
         'paymentoption' => 'required',
+        'amount'=>''
     ];
 
-    $input     = $request->only('title', 'description','targetAmount','paymentoption');
+    $input     = $request->only('title', 'description','targetAmount','paymentoption', 'amount');
     $validator = Validator::make($input, $rules);
 
     if ($validator->fails()) {
@@ -207,7 +208,8 @@ class ContributionController extends Controller
     $description    = $request->description;
     $targetAmount = $request->targetAmount;
     $verified = false;
-    $contribution     = Contribution::create(['title' => $title, 'description' => $description, 'targetAmount' => $targetAmount, 'paymentoption' => $paymentoption ,"verified"=>$verified]);
+    $amount = 0;
+    $contribution     = Contribution::create(['title' => $title, 'description' => $description,'amount'=>$amount, 'targetAmount' => $targetAmount, 'paymentoption' => $paymentoption ,"verified"=>$verified]);
     //$token = $request->name->createToken('accessToken');
     return response()->json(['success' => true, 'message' => 'fundraiser created successfully.']);
     }
