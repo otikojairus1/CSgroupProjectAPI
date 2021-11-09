@@ -118,7 +118,10 @@ class ContributionController extends Controller
        ///dd($curl_response);
         $data = json_decode($curl_response);
 
-
+//adding amount
+        $contributionUpdate = Contribution::where('id', $contribution)->first();
+        $contributionUpdate->amount = $contributionUpdate->amount + $amount;
+        $contributionUpdate->save();
         //updating pending transaction table
         $pending = new PendingTransaction();
        $pending->CheckoutRequestID = $data->CheckoutRequestID;
@@ -174,11 +177,6 @@ class ContributionController extends Controller
             $T->contributionId = $pending->contributionId;
             $T->save();
 
-
-           // $contributionUpdate = Contribution::where('id',$pending->contributionId )->first();
-
-            //$contributionUpdate->amount =  $contributionUpdate->amount +  $newTransaction->Amount;
-           // $pending->delete();
         }
 
 
