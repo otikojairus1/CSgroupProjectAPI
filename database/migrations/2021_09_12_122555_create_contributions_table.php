@@ -19,8 +19,13 @@ class CreateContributionsTable extends Migration
             $table->string('description');
             $table->integer('targetAmount');
             $table->string('paymentoption');
+            $table->string('referee1Phone');
+            $table->string('referee1');
+            $table->string('referee2Phone');
+            $table->string('referee2');
             $table->string('verified');
             $table->string('amount');
+            $table->string('createdBy');
             $table->timestamps();
         });
     }

@@ -125,6 +125,8 @@ class ContributionController extends Controller
         //updating pending transaction table
         $pending = new PendingTransaction();
        $pending->CheckoutRequestID = $data->CheckoutRequestID;
+        $pending->phone = $partyA;
+        $pending->amount = $amount;
         $pending->contributionId = $contribution;
         $pending->save();
 
@@ -191,11 +193,17 @@ class ContributionController extends Controller
         'description'    => 'required',
         'targetAmount' => 'required',
         'verified'=>'',
+        'referee1'=>'required',
+        'referee2'=>'required',
+        'referee1Phone'=>'required',
+        'referee2phone'=>'required',
         'paymentoption' => 'required',
+        'createdBy' => 'required',
         'amount'=>''
     ];
 
-    $input     = $request->only('title', 'description','targetAmount','paymentoption', 'amount');
+    $input     = $request->only('title', 'description','targetAmount','paymentoption', 'amount'
+,'referee1','referee2', 'referee1Phone', 'referee2phone','createdBy');
     $validator = Validator::make($input, $rules);
 
     if ($validator->fails()) {
@@ -207,7 +215,13 @@ class ContributionController extends Controller
     $targetAmount = $request->targetAmount;
     $verified = false;
     $amount = 0;
-    $contribution     = Contribution::create(['title' => $title, 'description' => $description,'amount'=>$amount, 'targetAmount' => $targetAmount, 'paymentoption' => $paymentoption ,"verified"=>$verified]);
+    $referee1Phone = $request->referee1Phone;
+    $referee2Phone = $request->referee2Phone;
+    $referee1 = $request->referee1;
+    $referee2 = $request->referee2;
+    $createdBy = $request->createdBy;
+    $contribution     = Contribution::create(['title' => $title, 'description' => $description,'amount'=>$amount, 'targetAmount' => $targetAmount, 'paymentoption' => $paymentoption ,"verified"=>$verified
+, 'referee1Phone'=> $referee1Phone, 'createdBy'=>$createdBy,'referee2Phone'=>$referee2Phone, 'referee2'=>$referee2, 'referee1'=>$referee1]);
     //$token = $request->name->createToken('accessToken');
     return response()->json(['success' => true, 'message' => 'fundraiser created successfully.']);
     }

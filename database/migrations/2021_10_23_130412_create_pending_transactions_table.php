@@ -16,6 +16,8 @@ class CreatePendingTransactionsTable extends Migration
         Schema::create('pending_transactions', function (Blueprint $table) {
             $table->id();
             $table->string('CheckoutRequestID')->nullable();
+            $table->string('phone')->nullable();
+            $table->string('amount')->nullable();
             $table->string('contributionId')->nullable();
             $table->timestamps();
         });
