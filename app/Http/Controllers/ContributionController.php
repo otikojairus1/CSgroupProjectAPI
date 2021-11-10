@@ -196,14 +196,14 @@ class ContributionController extends Controller
         'referee1'=>'required',
         'referee2'=>'required',
         'referee1Phone'=>'required',
-        'referee2phone'=>'required',
+        'referee2Phone'=>'required',
         'paymentoption' => 'required',
         'createdBy' => 'required',
         'amount'=>''
     ];
 
     $input     = $request->only('title', 'description','targetAmount','paymentoption', 'amount'
-,'referee1','referee2', 'referee1Phone', 'referee2phone','createdBy');
+,'referee1','referee2', 'referee1Phone', 'referee2Phone','createdBy');
     $validator = Validator::make($input, $rules);
 
     if ($validator->fails()) {
@@ -220,8 +220,7 @@ class ContributionController extends Controller
     $referee1 = $request->referee1;
     $referee2 = $request->referee2;
     $createdBy = $request->createdBy;
-    $contribution     = Contribution::create(['title' => $title, 'description' => $description,'amount'=>$amount, 'targetAmount' => $targetAmount, 'paymentoption' => $paymentoption ,"verified"=>$verified
-, 'referee1Phone'=> $referee1Phone, 'createdBy'=>$createdBy,'referee2Phone'=>$referee2Phone, 'referee2'=>$referee2, 'referee1'=>$referee1]);
+    $contribution     = Contribution::create(['title' => $title, 'description' => $description,'amount'=>$amount, 'targetAmount' => $targetAmount, 'paymentoption' => $paymentoption ,"verified"=>$verified,'referee1Phone'=> $referee1Phone, 'createdBy'=>$createdBy,'referee2Phone'=>$referee2Phone, 'referee2'=>$referee2, 'referee1'=>$referee1]);
     //$token = $request->name->createToken('accessToken');
     return response()->json(['success' => true, 'message' => 'fundraiser created successfully.']);
     }
@@ -287,15 +286,20 @@ class ContributionController extends Controller
        }
 
        $rules = [
-        'title' => 'required',
-        'description'    => 'required',
-        'targetAmount' => 'required',
-        'verified'=>'required',
-        'paymentoption' => 'required',
-        'id'=>'required'
+        'title' => ' ',
+        'description'    => '',
+        'targetAmount' => '',
+        'verified'=>'',
+        'paymentoption' => '',
+        'id'=>'required',
+        'referee1'=>'',
+        'referee2'=>'',
+        'referee1Phone'=>'',
+        'referee2Phone'=>'',
+        'createdBy'=> '',
     ];
 
-       $input     = $request->only('title', 'description','targetAmount','verified','paymentoption','id');
+       $input     = $request->only('title','createdBy','referee1','referee2','referee1Phone', 'referee2Phone','description','targetAmount','verified','paymentoption','id');
        $validator = Validator::make($input, $rules);
 
        if ($validator->fails()) {
@@ -307,6 +311,11 @@ class ContributionController extends Controller
        $targetAmount = $request->targetAmount;
        $verified = $request->verified;
        $id = $request->id;
+       $referee2 = $request->referee2;
+       $referee1 = $request->referee1;
+       $referee1Phone = $request->referee1Phone;
+       $referee2Phone = $request->referee2Phone;
+       $createdBy = $request->createdBy;
        //$contribution     = Contribution::update(['title' => $title, 'description' => $description, 'targetAmount' => $targetAmount, 'paymentoption' => $paymentoption ,"verified"=>$verified]);
        //$token = $request->name->createToken('accessToken');
        $Contribution->title = $title;
@@ -315,7 +324,11 @@ class ContributionController extends Controller
        $Contribution->targetAmount = $targetAmount;
        $Contribution->verified = $verified;
        $Contribution->id = $id;
-
+       $Contribution->referee2 = $referee2;
+       $Contribution->referee1 = $referee1;
+       $Contribution->referee1Phone = $referee1Phone;
+       $Contribution->referee2Phone = $referee2Phone;
+       $Contribution->createdBy = $createdBy;
        $Contribution->save();
 
        return response()->json(['success' => true, 'message' => 'fundraiser verified/updated successfully.']);
